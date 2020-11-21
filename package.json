@@ -1,0 +1,21 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "movie api with graphql",
+  "main": "index.js",
+  "repository": "git@github.com:yeongbba/graphql-movieapp.git",
+  "author": "yeongbba <yeongmolee2@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  }
+}
