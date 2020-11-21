@@ -1,6 +1,10 @@
+import { getMovies, getMovie, getSuggestions } from "./db";
+
 const resolvers = {
   Query: {
-    name: () => "yeong",
+    movies: (_, { rating, limit }) => getMovies(limit, rating),
+    movie: (_, { id }) => getMovie(id),
+    suggestions: (_, { id }) => getSuggestions(id),
   },
 };
 
