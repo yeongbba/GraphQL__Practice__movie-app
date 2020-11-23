@@ -20,7 +20,6 @@ const GET_MOVIES = gql`
 
 const Home = () => {
   const { loading, data } = useQuery(GET_MOVIES);
-  console.log(data);
   return (
     <section className="container">
       {loading ? (

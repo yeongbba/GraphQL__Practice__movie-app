@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import "./Detail.css";
 
 const GET_MOVIE = gql`
@@ -22,11 +22,21 @@ const GET_MOVIE = gql`
   }
 `;
 
+const LIKE_MOVIE = gql`
+  mutation toggleLikeMovie($id: Int!, $isLiked: Boolean!) {
+    toggleLikeMovie(id: $id, isLiked: $isLiked) @client
+  }
+`;
+
 const Detail = () => {
   const { id } = useParams();
   const { loading, data } = useQuery(GET_MOVIE, {
     variables: { id: parseInt(id) },
   });
+  const [toggleMovie] = useMutation(LIKE_MOVIE, {
+    variables: { id: parseInt(id), isLiked: data?.movie?.isLiked },
+  });
+
   return (
     <React.Fragment>
       <h1 className="detail__title">
@@ -45,6 +55,9 @@ const Detail = () => {
           <span>
             {data?.movie?.language} · {data?.movie?.rating}
           </span>
+          <button onClick={toggleMovie}>
+            {data?.movie?.isLiked ? "Unlike" : "Like"}
+          </button>
           <p>{data?.movie?.description_full}</p>
         </div>
       </div>
